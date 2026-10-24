@@ -1,4 +1,12 @@
 # Bank Customer Churn: DWH на PostgreSQL + Airflow и BI-дашборд на Power BI
+## Описание:
+Аналитический проект по оттоку клиентов банка. Данные загружаются в PostgreSQL и раскладываются в звёздную схему (DWH), загрузку оркестрирует Apache Airflow, а поверх хранилища построен дашборд в Power BI.
+
+**Стек**: PostgreSQL, Apache Airflow, Docker, SQL, Python, Power BI.
+
+## Цель:
+Выяснить, кто уходит из банка, сколько денег уходит вместе с клиентами и каким сегментам нужны программы удержания.
+
 ## Этапы выполнения проекта:
 ### 1. Проектирование модели данных
 Я взяла датасет Bank Customer Churn Prediction (Kaggle): около 10 000 клиентов банка из Франции, Германии и Испании. Исходные данные лежат в таблице raw_bank_churn.
@@ -15,6 +23,7 @@
 
 ### 3. BI-Дашборд в Power BI
 Загрузила данные из DWH в Power BI и создала дашборд:
+
 Страница 1. Ключевые показатели, отток по странам и полу:
 
 <img width="2011" height="1008" alt="image" src="https://github.com/user-attachments/assets/074bfd0c-6135-44d3-b588-26e1dc6d39d9" />
@@ -24,5 +33,11 @@
 Страница 3.  Баланс ушедших клиентов, диаграмма Парето по возрасту, потери по странам:
 
 <img width="2052" height="1120" alt="image" src="https://github.com/user-attachments/assets/f5440d49-341d-4ecb-bec5-e65ef2185765" />
+
+## Как запустить:
+1. Поднять окружение: `docker compose up -d`.
+2. Загрузить датасет в таблицу raw_bank_churn в PostgreSQL.
+3. В Airflow (http://localhost:8080) создать подключение postgres_dwh к этой базе и запустить DAG churn_dwh_pipeline.
+4. Подключить Power BI к базе и открыть отчёт.
 
 
